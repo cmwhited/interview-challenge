@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
-
+import { useEffect } from 'react'
+import Head from 'next/head'
 import { ThemeProvider } from 'theme-ui'
+
 import theme from '../theme'
 
 import Layout from '../components/Layout'
@@ -21,6 +22,12 @@ const MyApp = (props) => {
 
   return (
     <>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+      </Head>
       <ThemeProvider theme={theme}>
         <Layout>
           <Component {...pageProps} />

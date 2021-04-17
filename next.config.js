@@ -8,10 +8,14 @@ module.exports = (phase, { defaultConfig }) => {
   const config = {
     ...withBundleAnalyzer({
       webpack: (config) => {
+        config.module.rules.push({
+          test: /\.svg$/,
+          use: ['@svgr/webpack'],
+        })
         return config
       },
       env: {
-        NETWORK_HTTP_URI: process.env.NETWORK_HTTP_URI
+        NETWORK_HTTP_URI: process.env.NETWORK_HTTP_URI,
       },
       exportPathMap: async function (defaultPathMap) {
         return defaultPathMap
@@ -19,5 +23,8 @@ module.exports = (phase, { defaultConfig }) => {
     }),
   }
 
-  return config
+  return {
+    future: { webpack5: true },
+    ...config,
+  }
 }
