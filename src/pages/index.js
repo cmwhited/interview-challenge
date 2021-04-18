@@ -1,46 +1,17 @@
 import { Box, Flex } from 'theme-ui'
 import { useState, useMemo } from 'react'
-import { useQuery } from '@apollo/react-hooks'
 
 import { withApollo } from '../apollo/client'
-import { EPOCHES_QUERY } from '../apollo/queries'
+import { useEpoches } from '../apollo/epoch.queries'
 import { useDebounce } from '../utils/useDebounce.hook'
 
 import EpochesTableHeader from '../components/SearchHeader'
-import EpochesTable from '../components/Table'
+import EpochesTable from '../components/epoches/EpochesTable'
 import LoadMoreBtn from '../components/Button'
 
 const defPageSize = 3
 const defOrderBy = 'startBlock'
 const defOrderDirection = 'asc'
-
-const epochesTableColumns = Object.freeze([
-  {
-    field: 'id',
-    label: 'ID',
-    display: true,
-  },
-  {
-    field: 'startBlock',
-    label: 'Start Block',
-    display: true,
-  },
-  {
-    field: 'endBlock',
-    label: 'End Block',
-    display: true,
-  },
-  {
-    field: 'queryFeeRebates',
-    label: 'Query Fees',
-    display: true,
-  },
-  {
-    field: 'totalRewards',
-    label: 'Total Rewards',
-    display: true,
-  },
-])
 
 /**
  * @typedef {Object} EpochesQueryVars
@@ -79,11 +50,7 @@ const Index = () => {
     [skip, first, orderBy, orderDirection, debouncedSearchTerm],
   )
 
-  const { data, error } = useQuery(EPOCHES_QUERY, {
-    variables: queryVars,
-  })
-  const totalEpoches = data?.graphNetwork?.epochCount ?? 0
-  const epoches = data?.epoches ?? []
+  const { totalEpoches, epoches } = useEpoches(queryVars)
 
   /**
    * Update the query vars with the updated order information
@@ -118,8 +85,7 @@ const Index = () => {
         handleSearch={onPerformQuerySearch}
       />
       <EpochesTable
-        data={epoches}
-        columns={epochesTableColumns}
+        epoches={epoches}
         orderBy={orderBy}
         orderDirection={orderDirection}
         totalCount={totalEpoches}
@@ -141,4 +107,4 @@ const Index = () => {
   )
 }
 
-export default withApollo(Index, { ssr: true })
+export default withApollo(Index, { ssr: false })

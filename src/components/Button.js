@@ -11,10 +11,20 @@ const CustomButton = ({ type = 'button', text, handleClickEvent }) => (
   <Button
     type={type}
     onClick={() => handleClickEvent()}
-    px={8}
-    py={6}
     backgroundColor="transparent"
-    sx={{ border: '1px solid white', borderRadius: '5px', fontSize: '1.25rem' }}
+    sx={{
+      border: (theme) => `1px solid ${theme.colors.lightPurple}`,
+      fontWeight: (theme) => theme.fontWeights.heading,
+      borderRadius: '4px',
+      fontSize: '0.9rem',
+      paddingY: '1rem',
+      paddingX: '2rem',
+      ':hover': {
+        textShadow: (theme) =>
+          `0 0 1rem ${theme.colors.textShadowPrimary}, 0 0 2rem ${theme.colors.textShadowSecondary}`,
+        boxShadow: (theme) => `0 0 1.5rem ${theme.colors.lightPurple}`,
+      },
+    }}
   >
     {text}
   </Button>

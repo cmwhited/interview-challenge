@@ -26,3 +26,27 @@ export const EPOCHES_QUERY = gql`
     }
   }
 `
+
+export const EPOCH_ID_LIST_QEURY = gql`
+  {
+    epoches(skip: 0, first: 1000) {
+      id
+    }
+  }
+`
+
+export const EPOCH_QUERY = gql`
+  query EpochDetails($id: ID!) {
+    epoch(id: $id) {
+      id
+      startBlock
+      endBlock
+      queryFeeRebates
+      totalRewards
+      signalledTokens
+      stakeDeposited
+      totalIndexerRewards
+      totalDelegatorRewards
+    }
+  }
+`
