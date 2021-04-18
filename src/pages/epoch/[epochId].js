@@ -26,8 +26,8 @@ const EpochDetailsPage = ({ epoch }) => (
         <IconButton
           aria-label="return to Epoches list"
           sx={{
-            width: '40px',
-            height: '40px',
+            width: '2.5rem',
+            height: '2.5rem',
             borderRadius: '999999px',
             ':hover': { backgroundColor: (theme) => theme.colors.primaryPurple },
             transform: 'rotate(90deg)',
@@ -48,7 +48,7 @@ const EpochDetailsPage = ({ epoch }) => (
             `0 0 1rem ${theme.colors.textShadowPrimary}, 0 0 2rem ${theme.colors.textShadowSecondary}`,
         }}
       >
-        {epoch.id}
+        {epoch?.id}
       </Heading>
     </Flex>
   </Box>
