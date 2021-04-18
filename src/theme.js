@@ -1,6 +1,14 @@
 const colors = {
   background: 'rgba(12,10,29,1.0)',
   text: 'rgba(255,255,255,0.96)',
+  muted: 'rgba(255,255,255,0.64)',
+  medium: 'rgba(255,255,255,0.48)',
+  light: 'rgba(255,255,255,0.16)',
+  extraLight: 'rgba(255,255,255,0.02)',
+  primaryPurple: 'rgba(111,76,255,0.88)',
+  lightPurple: 'rgba(111,76,255,0.32)',
+  textShadowPrimary: 'rgba(170,234,255,0.32)',
+  textShadowSecondary: 'rgba(111,76,255,0.64)',
 }
 
 const fonts = {
@@ -22,15 +30,16 @@ const space = [
   '128px',
   '256px',
 ]
-const fontWeights = { body: 400, caption: 500, heading: 600, }
+const fontWeights = { body: 400, caption: 500, heading: 600 }
 const borderRadius = { base: space[1] }
 const opacity = { base: 0.72 }
 
 const globalTheme = {
   useCustomProperties: true,
-  colors: colors,
-  fonts: fonts,
-  space: space,
+  colors,
+  fonts,
+  space,
+  fontWeights,
   styles: {
     root: {
       fontFamily: 'body',
@@ -55,12 +64,10 @@ const globalTheme = {
     h6: {
       fontWeight: 'heading',
     },
-    p: {
-    },
-    a: {
-    },
-    text: {}
-  }
+    p: {},
+    a: {},
+    text: {},
+  },
 }
 
 export default globalTheme
