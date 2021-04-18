@@ -15,7 +15,15 @@ const Layout = ({ children, page }) => {
       <header></header>
 
       <main>
-        <Container sx={{ maxWidth: '90%', height: '100vh' }} mx="auto" pt={92}>
+        <Container
+          sx={{
+            width: '100%',
+            '@media (min-width: 748px)': { maxWidth: '90%' },
+            height: '100vh',
+          }}
+          mx="auto"
+          pt={92}
+        >
           {children}
         </Container>
       </main>
@@ -39,6 +47,9 @@ const Layout = ({ children, page }) => {
           margin: 0;
           padding: 0;
           overflow-x: hidden !important;
+          @media (max-width: 468px) {
+            overflow-x: auto;
+          }
         }
         ul,
         ol,
@@ -102,13 +113,20 @@ const Layout = ({ children, page }) => {
       `}</style>
       <style jsx global>{`
         html {
+          margin: 0;
+          padding: 0;
+          width: 100vw;
+          height: 100vh;
+          overflow-x: hidden !important;
+          @media (max-width: 468px) {
+            overflow-x: auto;
+          }
         }
         body {
           overflow: auto;
           scroll-behavior: smooth;
         }
         .layout {
-          max-width: 1260px;
           margin: auto;
           padding: 0 20px;
           position: relative;

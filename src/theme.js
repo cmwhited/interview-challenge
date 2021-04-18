@@ -4,7 +4,7 @@ const colors = {
   muted: 'rgba(255,255,255,0.64)',
   medium: 'rgba(255,255,255,0.48)',
   light: 'rgba(255,255,255,0.16)',
-  extraLight: 'rgba(255,255,255,0.08)',
+  extraLight: 'rgba(255,255,255,0.02)',
   primaryPurple: 'rgba(111,76,255,0.88)',
   lightPurple: 'rgba(111,76,255,0.32)',
   textShadowPrimary: 'rgba(170,234,255,0.32)',

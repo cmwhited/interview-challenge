@@ -14,24 +14,15 @@ const defOrderBy = 'startBlock'
 const defOrderDirection = 'asc'
 
 /**
- * @typedef {Object} EpochesQueryVars
- * @property {number} skip
- * @property {number} first
- * @property {string} orderBy
- * @property {'asc' | 'desc'} orderDirection
- * @property {Object} where
- * @property {number} where.startBlock
- *
  * Build the query vars to send to the epoches query from the input values
  * @param {number} skip the records to skip. used in pagination
  * @param {number} first the number of records to return after the skip. used in pagination
  * @param {string} orderBy the field to order the results by
  * @param {'asc' | 'desc'} orderDirection the direction to order the field by
  * @param {number | null} debouncedSearchTerm the user-entered, debounced search term
- * @returns {EpochesQueryVars}
+ * @returns {import('../apollo/epoch.queries').EpochesQueryVars}
  */
-const buildQueryVars = (skip, first, orderBy, orderDirection, debouncedSearchTerm) => ({
-  skip,
+const buildQueryVars = (first, orderBy, orderDirection, debouncedSearchTerm) => ({
   first,
   orderBy,
   orderDirection,
@@ -39,15 +30,14 @@ const buildQueryVars = (skip, first, orderBy, orderDirection, debouncedSearchTer
 })
 
 const Index = () => {
-  const [skip, setSkip] = useState(0)
   const [first, setFirst] = useState(defPageSize)
   const [orderBy, setOrderBy] = useState(defOrderBy)
   const [orderDirection, setOrderDirection] = useState(defOrderDirection)
   const [where, setWhere] = useState(null)
   const debouncedSearchTerm = useDebounce(where, 500)
   const queryVars = useMemo(
-    () => buildQueryVars(skip, first, orderBy, orderDirection, debouncedSearchTerm),
-    [skip, first, orderBy, orderDirection, debouncedSearchTerm],
+    () => buildQueryVars(first, orderBy, orderDirection, debouncedSearchTerm),
+    [first, orderBy, orderDirection, debouncedSearchTerm],
   )
 
   const { totalEpoches, epoches } = useEpoches(queryVars)

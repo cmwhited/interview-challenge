@@ -5,7 +5,6 @@ import { EPOCHES_QUERY } from './queries'
 
 /**
  * @typedef {Object} EpochesQueryVars
- * @property {number} skip
  * @property {number} first
  * @property {string} orderBy
  * @property {'asc' | 'desc'} orderDirection

@@ -9,31 +9,37 @@ const epochesColumns = Object.freeze([
     key: 'id',
     label: 'Epoch',
     width: '19%',
+    minWidth: '150px',
   },
   {
     key: 'startBlock',
     label: 'Start Block',
     width: '19%',
+    minWidth: '150px',
   },
   {
     key: 'endBlock',
     label: 'End Block',
     width: '19%',
+    minWidth: '150px',
   },
   {
     key: 'queryFeeRebates',
     label: 'Query Fees',
     width: '19%',
+    minWidth: '150px',
   },
   {
     key: 'totalRewards',
     label: 'Total Rewards',
     width: '19%',
+    minWidth: '150px',
   },
   {
     key: 'viewDelegate',
     label: null,
     width: '5%',
+    minWidth: '25px',
   },
 ])
 
@@ -80,8 +86,26 @@ const EpochesTable = ({
         alignItems: 'flex-start',
       }}
     >
-      <Box px={2} py={4} sx={{ flex: '1 1 auto', width: '100%' }}>
-        <table sx={{ width: '100%', borderCollapse: 'collapse' }}>
+      <Flex
+        px={2}
+        py={4}
+        sx={{
+          flex: '1 1 auto',
+          flexWrap: 'nowrap',
+          width: '100%',
+        }}
+      >
+        <table
+          sx={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            '@media(max-width:468px)': {
+              overflowX: 'scroll',
+              width: 'auto',
+              display: 'block',
+            },
+          }}
+        >
           <thead>
             <tr>
               {epochesColumns.map((column) => (
@@ -108,6 +132,7 @@ const EpochesTable = ({
                     borderBottomColor: (theme) =>
                       column.key === orderBy ? theme.colors.primary : theme.colors.muted,
                     width: column.width,
+                    minWidth: column.minWidth,
                   }}
                 >
                   <Flex as="span" sx={{ alignItems: 'center' }}>
@@ -144,29 +169,38 @@ const EpochesTable = ({
                 }}
                 onMouseEnter={() => setActiveRow(epoch.id)}
                 onMouseLeave={() => setActiveRow(null)}
+                onTouchMove={() => setActiveRow(epoch.id)}
               >
-                <TableCell width="19%" active={orderBy === 'id'}>
+                <TableCell width="19%" minWidth="150px" active={orderBy === 'id'}>
                   {epoch.id}
                 </TableCell>
-                <TableCell width="19%" active={orderBy === 'startBlock'}>
+                <TableCell width="19%" minWidth="150px" active={orderBy === 'startBlock'}>
                   {`#${epoch.startBlock}`}
                 </TableCell>
-                <TableCell width="19%" active={orderBy === 'endBlock'}>
+                <TableCell width="19%" minWidth="150px" active={orderBy === 'endBlock'}>
                   {`#${epoch.endBlock}`}
                 </TableCell>
-                <TableCell width="19%" active={orderBy === 'queryFeeRebates'}>
+                <TableCell
+                  width="19%"
+                  minWidth="150px"
+                  active={orderBy === 'queryFeeRebates'}
+                >
                   <Flex sx={{ alignItems: 'center' }}>
                     <Text mr={1}>{epoch.queryFeeRebates}</Text>
                     <Text sx={{ fontSize: '0.75rem' }}>GRT</Text>
                   </Flex>
                 </TableCell>
-                <TableCell width="19%" active={orderBy === 'totalRewards'}>
+                <TableCell
+                  width="19%"
+                  minWidth="150px"
+                  active={orderBy === 'totalRewards'}
+                >
                   <Flex sx={{ alignItems: 'center' }}>
                     <Text mr={1}>{epoch.totalRewards}</Text>
                     <Text sx={{ fontSize: '0.75rem' }}>GRT</Text>
                   </Flex>
                 </TableCell>
-                <TableCell width="5%">
+                <TableCell width="5%" minWidth="25px">
                   {activeRow === epoch.id ? (
                     <Link href={`/epoch/${epoch.id}`}>
                       <IconButton
@@ -189,7 +223,7 @@ const EpochesTable = ({
             ))}
           </tbody>
         </table>
-      </Box>
+      </Flex>
       <Box>
         <Text
           sx={{
@@ -204,11 +238,12 @@ const EpochesTable = ({
   )
 }
 
-const TableCell = ({ children, width, active }) => (
+const TableCell = ({ children, width, minWidth, active }) => (
   <Themed.td
     sx={{
       height: '4rem',
       width,
+      minWidth,
       verticalAlign: 'middle',
       paddingLeft: '1rem',
       fontSize: '1rem',

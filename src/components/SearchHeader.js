@@ -43,6 +43,7 @@ const SearchHeader = ({ headerLabel, inputPlaceholder, handleSearch }) => {
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        paddingX: '0.5rem',
       }}
       mb={8}
     >
